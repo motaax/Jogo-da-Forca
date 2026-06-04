@@ -50,36 +50,72 @@ int main(){
     sorteia_palavra_arquivo(palavra_secreta, "palavras.txt");
 
     char tentativas[30] = "";
+    int num = 0;
     int erros = 0;
+    char letra;
 
     printf("Bem-vindo ao Jogo da Forca! \n");
-    printf("Palavra: ");
-    printf("Tentativas restantes: 6");
-    printf("Informe uma letra: a");
-    printf("Palavra atualizada.");
-    printf("Palavra: a*****a");
-    printf("Tentativas restantes: 6");
-    printf("Informe uma letra: e: ");
 
-    printf("Palavra atualizada.");
-    printf("Palavra: a*e***a");
-    printf("Tentativas restantes: 6");
-    printf("Informe uma letra: b: ");
+    for(; erros < 6 && !palavra(palavra_secreta, tentativas);) {
+        printf("Palavra: ");
+        for(int i = 0; palavra_secreta[i] != '\0'; i++) {
+            int achou = 0;
+            for(int j = 0; tentativas[j] != '\0'; j++) {
+                if(tentativas[j] == palavra_secreta[i]) {
+                    achou = 1;
+                    break;
+                }
+            }
 
-    printf("Letra incorreta.");
-    printf("Palavra: a*e***a");
-    printf("Tentativas restantes: 5");
-    printf("Informe uma letra: b: ");
+            if(achou) {
+                printf("%c", palavra_secreta[i]);
+            } else {
+                printf("*");
+            }
+        }
 
-    printf("Palavra atualizada.");
-    printf("Palavra: a*ergia");
-    printf("Tentativas restantes: 3");
-    printf("Informe uma letra: l: ");
+        printf("\n");
 
-    printf("Palavra atualizada.");
-    printf("Palavra secreta: %s\n", palavra_secreta);
-    printf("Parabens! Voce ganhou!");
+        printf("Tentativas restantes: %d \n", 6 - erros);
+        printf("Informe uma letra: ");
+        scanf(" %c", &letra);
 
+        int tentou = 0;
+        for(int j = 0; tentativas[j] != '\0'; j++) {
+            if(tentativas[j] == letra) {
+                tentou = 1;
+                break;
+            }
+        }
+
+        if(!tentou) {
+            tentativas[num] = letra;
+            num++;
+            tentativas[num] = '\0';
+
+            int encontrou = 0;
+            for(int i = 0; palavra_secreta[i] != '\0'; i++) {
+                if(palavra_secreta[i] == letra) {
+                    encontrou = 1;
+                    break;
+                }
+            }
+
+            limpar_tela();
+
+            if(encontrou) {
+                printf("Palavra atualizada.\n");
+            } else {
+                printf("Letra incorreta.\n");
+                erros++;
+            }
+        } 
+    }
+
+    if(palavra(palavra_secreta, tentativas)) {
+        printf("Palavra secreta: %s\n", palavra_secreta);
+        printf("Parabens! Voce ganhou!\n");
+    } 
 
     return 0;
 }
