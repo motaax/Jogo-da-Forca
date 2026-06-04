@@ -1,14 +1,13 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 
-// Funcao para sortear uma palavra de um arquivo
-// Nao precisa alterar
 void sorteia_palavra_arquivo(char dest[], char nome_arquivo[]){
     char palavras[1000][50];
     int qtd = 0;
     FILE *file = fopen(nome_arquivo, "r");
-    if (file == NULL) { // verifica se houve erro ao abrir o arquivo
+    if (file == NULL) { 
         printf("Erro ao abrir o arquivo.\n");
         exit(1);
     }
@@ -17,14 +16,14 @@ void sorteia_palavra_arquivo(char dest[], char nome_arquivo[]){
     while (fscanf(file, "%s ", palavras[qtd]) == 1) {
         qtd++;
     }
+
     fclose(file);
-    // sorteio da palavra
-    srand(time(NULL)); // inicializa o gerador de números aleatórios
-    int indice = rand() % qtd; // escolhe um índice aleatório entre 0 e qtd-1
-    strcpy(dest, palavras[indice]); // copia a palavra sorteada para dest
+
+    srand(time(NULL)); 
+    int indice = rand() % qtd; 
+    strcpy(dest, palavras[indice]); 
 }
 
-// Limpa a tela dos printfs (somente Linux)
 void limpar_tela(){
     system("clear");
 }
