@@ -1,3 +1,11 @@
 gelo
 leao
 planta
+fogo
+agua
+sorvete
+castelo
+casa
+apartamento
+fup
+linguagem
