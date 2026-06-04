@@ -30,7 +30,8 @@ void limpar_tela(){
 int palavra(char palavra[], char tentativas[]) {
     for(int i = 0; palavra[i] != '\0'; i++) {
         int encontrou = 0;
-        for(int j = 0; tentativas[i] != '\0'; j++) {
+
+        for(int j = 0; tentativas[j] != '\0'; j++) {
             if(tentativas[j] == palavra[i]) {
                 encontrou = 1;
                 break;
@@ -115,7 +116,9 @@ int main(){
     if(palavra(palavra_secreta, tentativas)) {
         printf("Palavra secreta: %s\n", palavra_secreta);
         printf("Parabens! Voce ganhou!\n");
-    } 
+    } else {
+        printf("Voce perdeu!");
+    }
 
     return 0;
 }
