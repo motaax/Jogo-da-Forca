@@ -27,7 +27,7 @@ void limpar_tela(){
     system("clear");
 }
 
-int palavra(char palavra[], char tentativas[]) {
+int achou(char palavra[], char tentativas[]) {
     for(int i = 0; palavra[i] != '\0'; i++) {
         int encontrou = 0;
 
@@ -57,7 +57,7 @@ int main(){
 
     printf("Bem-vindo ao Jogo da Forca! \n");
 
-    for(; erros < 6 && !palavra(palavra_secreta, tentativas);) {
+    for(; erros < 6 && !achou(palavra_secreta, tentativas);) {
         printf("Palavra: ");
         for(int i = 0; palavra_secreta[i] != '\0'; i++) {
             int achou = 0;
@@ -78,7 +78,13 @@ int main(){
         printf("\n");
 
         printf("Tentativas restantes: %d \n", 6 - erros);
-        printf("Informe uma letra: ");
+
+        printf("Letras usadas: ");
+        for(int i = 0; tentativas[i] != '\0'; i++) {
+            printf("%c ", tentativas[i]); 
+        }
+
+        printf("\nInforme uma letra: ");
         scanf(" %c", &letra);
 
         int tentou = 0;
@@ -113,11 +119,12 @@ int main(){
         } 
     }
 
-    if(palavra(palavra_secreta, tentativas)) {
+    if(achou(palavra_secreta, tentativas)) {
         printf("Palavra secreta: %s\n", palavra_secreta);
         printf("Parabens! Voce ganhou!\n");
     } else {
-        printf("Voce perdeu!");
+        printf("Voce perdeu! \n");
+        printf("Palavra secreta: %s\n", palavra_secreta);
     }
 
     return 0;
